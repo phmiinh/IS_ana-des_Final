@@ -27,13 +27,6 @@ src/main/
   webapp/             # JSP views
     css/
     *.jsp
-├── java/com/restaurant/
-│   ├── model/          # Entity classes
-│   ├── dao/            # Data Access Object
-│   └── servlet/        # Controller
-└── webapp/             # JSP views
-    ├── css/
-    └── *.jsp
 
 
 
