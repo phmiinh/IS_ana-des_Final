@@ -88,5 +88,68 @@ public class ImportedInvoiceDAO extends DAO {
 
         return details;
     }
+
+    /**
+     * Add a new imported invoice
+     * @param invoice - ImportedInvoice object
+     * @return the generated invoice ID, or -1 if failed
+     */
+    public int addImportedInvoice(ImportedInvoice invoice) {
+        String sql = "INSERT INTO ImportedInvoice (importDate, totalPrice, supplierID, warehouseStaffID) VALUES (?, ?, ?, ?)";
+        int generatedID = -1;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setDate(1, invoice.getImportDate());
+            ps.setFloat(2, invoice.getTotalPrice());
+            ps.setInt(3, invoice.getSupplierID());
+            ps.setInt(4, invoice.getWarehouseStaffID());
+
+            int rowsAffected = ps.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedID = rs.getInt(1);
+                }
+                rs.close();
+            }
+
+            ps.close();
+        } catch (SQLException e) {
+            System.err.println("Error in addImportedInvoice: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return generatedID;
+    }
+
+    /**
+     * Add invoice detail (ingredient)
+     * @param detail - ImportedInvoiceDetail object
+     * @return true if successful, false otherwise
+     */
+    public boolean addInvoiceDetail(ImportedInvoiceDetail detail) {
+        String sql = "INSERT INTO ImportedInvoiceDetail (quantity, price, importInvoiceID, ingredientID) VALUES (?, ?, ?, ?)";
+        boolean success = false;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setFloat(1, detail.getQuantity());
+            ps.setFloat(2, detail.getPrice());
+            ps.setInt(3, detail.getImportInvoiceID());
+            ps.setInt(4, detail.getIngredientID());
+
+            int rowsAffected = ps.executeUpdate();
+            success = (rowsAffected > 0);
+
+            ps.close();
+        } catch (SQLException e) {
+            System.err.println("Error in addInvoiceDetail: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return success;
+    }
 }
 

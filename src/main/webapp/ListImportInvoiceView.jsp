@@ -51,6 +51,13 @@
                     <div style="margin-bottom: 20px; text-align: center;">
                         <a href="SupplierStatView.jsp" style="color: #3498db; text-decoration: none;">← Back to Supplier Statistics</a>
                     </div>
+
+                    <!-- Action Bar -->
+                    <div class="action-bar">
+                        <a href="ImportedInvoiceServlet?action=load_add" class="btn btn-success">
+                            <span>➕</span> Add New Invoice
+                        </a>
+                    </div>
                     
                     <c:choose>
                         <c:when test="${not empty invoices}">
@@ -62,19 +69,27 @@
                                             <th>Import Date</th>
                                             <th>Total Price</th>
                                             <th>Supplier</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach var="invoice" items="${invoices}">
                                             <tr>
                                                 <td>
-                                                    <a href="ImportedInvoiceServlet?action=detail&invoiceID=${invoice.importInvoiceID}">
-                                                        ${invoice.importInvoiceID}
+                                                    <a href="ImportedInvoiceServlet?action=detail&invoiceID=${invoice.importInvoiceID}" 
+                                                       style="color: #3498db; text-decoration: none; font-weight: 600;">
+                                                        #${invoice.importInvoiceID}
                                                     </a>
                                                 </td>
                                                 <td>${invoice.importDate}</td>
-                                                <td><c:out value="${String.format('%,.0f', invoice.totalPrice)}"/>$</td>
+                                                <td><c:out value="${String.format('%,.0f', invoice.totalPrice)}"/> VND</td>
                                                 <td>${supplierName}</td>
+                                                <td>
+                                                    <a href="ImportedInvoiceServlet?action=detail&invoiceID=${invoice.importInvoiceID}" 
+                                                       class="btn-action">
+                                                        View Details
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>

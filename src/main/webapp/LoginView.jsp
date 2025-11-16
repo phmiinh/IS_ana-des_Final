@@ -20,6 +20,13 @@
                 </div>
             </c:if>
             
+            <!-- Success Message -->
+            <c:if test="${not empty successMessage}">
+                <div class="message message-success">
+                    ${successMessage}
+                </div>
+            </c:if>
+            
             <!-- Login Form -->
             <form action="StaffServlet" method="post">
                 <input type="hidden" name="action" value="login">
@@ -37,9 +44,8 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             
-            <div style="margin-top: 20px; text-align: center; color: #777; font-size: 12px;">
-                <p>Sample accounts:</p>
-                <p>manager / 123 | warehouse / 123 | sale / 123</p>
+            <div style="margin-top: 20px; text-align: center;">
+                <p style="color: #666;">Don't have an account? <a href="RegisterView.jsp" style="color: #3498db; text-decoration: none; font-weight: bold;">Register now</a></p>
             </div>
         </div>
     </div>

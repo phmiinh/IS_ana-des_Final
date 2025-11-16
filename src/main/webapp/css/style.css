@@ -423,6 +423,14 @@ table tbody td a:hover {
     margin: 0;
 }
 
+/* Action Bar */
+.action-bar {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
 /* Search Section */
 .search-section {
     margin: 30px 0;
@@ -500,12 +508,12 @@ table tbody td a:hover {
 }
 
 .total-row {
-    background-color: #34495e !important;
-    color: #fff !important;
+    background-color: #f8f9fa !important;
+    color: #000 !important;
 }
 
 .total-row td {
-    color: #fff !important;
+    color: #000 !important;
     font-weight: bold;
 }
 
@@ -586,44 +594,69 @@ table tbody td a:hover {
     background-color: #c0392b;
 }
 
-/* Statistic Options */
-.statistic-options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin: 30px auto;
+/* Statistic Grid */
+.statistic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
 }
 
-.statistic-option-btn {
-    padding: 15px 20px;
+.statistic-card {
     background-color: #fff;
-    border: 2px solid #34495e;
-    border-radius: 4px;
+    border-radius: 8px;
+    padding: 30px;
     text-align: center;
     text-decoration: none;
     color: #2c3e50;
-    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
-.statistic-option-btn:hover {
-    background-color: #3498db;
-    color: #fff;
+.statistic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
     border-color: #3498db;
 }
 
-.statistic-option-btn.disabled {
-    background-color: #ecf0f1;
+.statistic-card.disabled {
+    background-color: #f8f9fa;
     color: #95a5a6;
-    border-color: #bdc3c7;
     cursor: not-allowed;
+    opacity: 0.6;
 }
 
-.statistic-option-btn.disabled:hover {
-    background-color: #ecf0f1;
+.statistic-card.disabled:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-color: transparent;
+}
+
+.statistic-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.statistic-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.statistic-card.disabled h3 {
     color: #95a5a6;
-    border-color: #bdc3c7;
+}
+
+.statistic-card p {
+    font-size: 14px;
+    color: #7f8c8d;
+    line-height: 1.5;
+}
+
+.statistic-card.disabled p {
+    color: #bdc3c7;
 }
 
 /* Filter Section */

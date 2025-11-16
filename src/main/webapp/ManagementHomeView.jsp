@@ -44,7 +44,14 @@
             <div class="content">
                 <div class="card">
                     <h2 class="card-title">Welcome to the Restaurant Management System</h2>
-                    <p style="margin-bottom: 20px;">Your role: <strong style="color: #3498db; text-transform: uppercase;">${sessionScope.staff.role}</strong></p>
+                    <p style="margin-bottom: 20px;">Your role: <strong style="color: #3498db;">
+                        <c:choose>
+                            <c:when test="${sessionScope.staff.role == 'manager'}">Management Staff</c:when>
+                            <c:when test="${sessionScope.staff.role == 'warehouse'}">Warehouse Staff</c:when>
+                            <c:when test="${sessionScope.staff.role == 'sale'}">Sale Staff</c:when>
+                            <c:otherwise>${sessionScope.staff.role}</c:otherwise>
+                        </c:choose>
+                    </strong></p>
                     
                     <div class="dashboard-cards">
                         <div class="dashboard-card">
@@ -88,7 +95,14 @@
                         </tr>
                         <tr>
                             <td style="font-weight: 600;">Role:</td>
-                            <td style="text-transform: uppercase; color: #3498db; font-weight: 600;">${sessionScope.staff.role}</td>
+                            <td style="color: #3498db; font-weight: 600;">
+                                <c:choose>
+                                    <c:when test="${sessionScope.staff.role == 'manager'}">Management Staff</c:when>
+                                    <c:when test="${sessionScope.staff.role == 'warehouse'}">Warehouse Staff</c:when>
+                                    <c:when test="${sessionScope.staff.role == 'sale'}">Sale Staff</c:when>
+                                    <c:otherwise>${sessionScope.staff.role}</c:otherwise>
+                                </c:choose>
+                            </td>
                         </tr>
                     </table>
                 </div>

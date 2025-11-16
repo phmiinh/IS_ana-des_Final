@@ -40,7 +40,7 @@ public class SupplierStatServlet extends HttpServlet {
                 request.setAttribute("endDate", endDateStr);
 
             } catch (IllegalArgumentException e) {
-                request.setAttribute("errorMessage", "Định dạng ngày không hợp lệ. Vui lòng sử dụng yyyy-MM-dd.");
+                request.setAttribute("errorMessage", "Invalid date format. Please use yyyy-MM-dd.");
                 e.printStackTrace();
             }
         }

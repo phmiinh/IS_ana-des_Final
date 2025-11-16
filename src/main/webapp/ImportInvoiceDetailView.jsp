@@ -70,19 +70,26 @@
                                                 <td>${status.index + 1}</td>
                                                 <td>${detail.ingredientName}</td>
                                                 <td><c:out value="${String.format('%,.2f', detail.quantity)}"/>kg</td>
-                                                <td><c:out value="${String.format('%,.0f', detail.price)}"/>$</td>
+                                                <td><c:out value="${String.format('%,.0f', detail.price)}"/> VND</td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
                                     <tfoot>
                                         <tr class="total-row">
-                                            <td colspan="3" style="text-align: right; font-weight: bold;">Total price</td>
+                                            <td colspan="2" style="text-align: right; font-weight: bold;">Total</td>
+                                            <td style="font-weight: bold;">
+                                                <c:set var="totalQuantity" value="0"/>
+                                                <c:forEach var="detail" items="${details}">
+                                                    <c:set var="totalQuantity" value="${totalQuantity + detail.quantity}"/>
+                                                </c:forEach>
+                                                <c:out value="${String.format('%,.2f', totalQuantity)}"/>kg
+                                            </td>
                                             <td style="font-weight: bold;">
                                                 <c:set var="totalPrice" value="0"/>
                                                 <c:forEach var="detail" items="${details}">
                                                     <c:set var="totalPrice" value="${totalPrice + (detail.quantity * detail.price)}"/>
                                                 </c:forEach>
-                                                <c:out value="${String.format('%,.0f', totalPrice)}"/>$
+                                                <c:out value="${String.format('%,.0f', totalPrice)}"/> VND
                                             </td>
                                         </tr>
                                     </tfoot>

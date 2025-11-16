@@ -47,6 +47,13 @@
                         <h2>Manage Dishes</h2>
                     </div>
                     
+                    <!-- Action Bar -->
+                    <div class="action-bar">
+                        <a href="DishServlet?action=load_add" class="btn btn-success">
+                            <span>➕</span> Add New Dish
+                        </a>
+                    </div>
+                    
                     <!-- Search Form -->
                     <div class="search-section">
                         <form action="DishServlet" method="get" class="search-form-centered">

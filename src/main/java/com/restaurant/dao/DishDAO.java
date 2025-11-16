@@ -106,5 +106,33 @@ public class DishDAO extends DAO {
 
         return success;
     }
+
+    /**
+     * Add a new dish
+     * @param dish - Dish object with new dish information
+     * @return true if add successful, false otherwise
+     */
+    public boolean addDish(Dish dish) {
+        String sql = "INSERT INTO Dish (name, description, price, managementStaffID) VALUES (?, ?, ?, ?)";
+        boolean success = false;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, dish.getName());
+            ps.setString(2, dish.getDescription());
+            ps.setFloat(3, dish.getPrice());
+            ps.setInt(4, dish.getManagementStaffID());
+
+            int rowsAffected = ps.executeUpdate();
+            success = (rowsAffected > 0);
+
+            ps.close();
+        } catch (SQLException e) {
+            System.err.println("Error in addDish: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return success;
+    }
 }
 

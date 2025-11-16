@@ -28,6 +28,8 @@ public class DishServlet extends HttpServlet {
             handleSearch(request, response);
         } else if ("load_edit".equals(action)) {
             handleLoadEdit(request, response);
+        } else if ("load_add".equals(action)) {
+            handleLoadAdd(request, response);
         } else {
             // Default: load all dishes
             handleSearch(request, response);
@@ -44,6 +46,8 @@ public class DishServlet extends HttpServlet {
 
         if ("update".equals(action)) {
             handleUpdate(request, response);
+        } else if ("add".equals(action)) {
+            handleAdd(request, response);
         }
     }
 
@@ -120,17 +124,63 @@ public class DishServlet extends HttpServlet {
                 dishDAO.closeConnection();
                 
                 request.setAttribute("dish", updatedDish);
-                request.setAttribute("message", "Cập nhật món ăn thành công!");
+                request.setAttribute("message", "Dish updated successfully!");
                 request.getRequestDispatcher("EditDishView.jsp").forward(request, response);
             } else {
                 dishDAO.closeConnection();
-                request.setAttribute("errorMessage", "Cập nhật món ăn thất bại!");
+                request.setAttribute("errorMessage", "Failed to update dish!");
                 request.getRequestDispatcher("EditDishView.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Có lỗi xảy ra: " + e.getMessage());
+            request.setAttribute("errorMessage", "An error occurred: " + e.getMessage());
             request.getRequestDispatcher("EditDishView.jsp").forward(request, response);
+        }
+    }
+
+    /**
+     * Handle load add dish form
+     */
+    private void handleLoadAdd(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("AddDishView.jsp").forward(request, response);
+    }
+
+    /**
+     * Handle add new dish
+     */
+    private void handleAdd(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            float price = Float.parseFloat(request.getParameter("price"));
+
+            // Get management staff ID from session
+            com.restaurant.model.Staff staff = (com.restaurant.model.Staff) request.getSession().getAttribute("staff");
+            int managementStaffID = 1; // Default to 1 if not available
+
+            Dish dish = new Dish();
+            dish.setName(name);
+            dish.setDescription(description);
+            dish.setPrice(price);
+            dish.setManagementStaffID(managementStaffID);
+
+            DishDAO dishDAO = new DishDAO();
+            boolean success = dishDAO.addDish(dish);
+            dishDAO.closeConnection();
+
+            if (success) {
+                request.setAttribute("message", "Dish added successfully!");
+                response.sendRedirect("DishServlet?action=search");
+            } else {
+                request.setAttribute("error", "Failed to add dish!");
+                request.getRequestDispatcher("AddDishView.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "An error occurred: " + e.getMessage());
+            request.getRequestDispatcher("AddDishView.jsp").forward(request, response);
         }
     }
 }

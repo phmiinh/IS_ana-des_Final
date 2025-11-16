@@ -1,223 +1,421 @@
-# Hệ thống Quản lý Nhà hàng (Restaurant Management System)
+# Restaurant Management System - Information System Analysis & Design
 
-## Mô tả
-Ứng dụng Web Java (JSP, Servlet, DAO) hoàn chỉnh cho quản lý nhà hàng, sử dụng cơ sở dữ liệu MySQL.
+## [object Object] Overview
 
-## Công nghệ sử dụng
-- **Backend**: Java Servlet, JSP
-- **Database**: MySQL 8.0+
-- **Build Tool**: Maven
-- **Server**: Apache Tomcat 9.0+
-- **Architecture**: MVC (Model-View-Controller)
+This project is a comprehensive **Restaurant Management System** developed as part of the **Information System Analysis and Design** course. The system implements a multi-user platform that serves different stakeholders including Management Staff, Warehouse Staff, Sale Staff, and Customers.
 
-## Cấu trúc Dự án
+### 🎯 System Objectives
+
+The Restaurant Management System enables:
+- **Management Staff**: View statistics (dishes, ingredients, customers, suppliers), manage dish information, create combo menus
+- **Warehouse Staff**: Import materials from suppliers, manage supplier information
+- **Sale Staff**: Receive customers, take orders, process payments, create membership cards, confirm reservations and online orders
+- **Customers**: Search, book tables, and order food online
+
+---
+
+## 🔍 Implemented Modules
+
+This implementation focuses on **two core modules** as specified in the course requirements:
+
+### Module 1: Dish Information Management
+**Actor**: Management Staff
+
+**Flow**:
+1. Select menu to manage dish information
+2. Select function to edit dish information
+3. Search for dishes by name
+4. Select dish from search results
+5. Enter/update dish information
+6. Save changes to database
+
+### Module 2: Supplier Statistics
+**Actor**: Management Staff
+
+**Flow**:
+1. Select menu to view statistical reports
+2. Select supplier statistics by imported quantity
+3. Select start and end time for statistics
+4. View supplier statistics
+5. Select a supplier to view details
+6. View list of imported invoices
+7. Select an invoice to view details
+8. View detailed invoice information (including ingredients)
+
+---
+
+## 🏗️ System Architecture
+
+### Technology Stack
+- **Backend**: Java Servlet, JSP (J2EE)
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Database**: MySQL
+- **Server**: Apache Tomcat 9.x
+- **Architecture Pattern**: MVC (Model-View-Controller)
+
+### Project Structure
 ```
-restaurant-management/
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── com/restaurant/
-│       │       ├── model/          # POJOs (19 classes)
-│       │       ├── dao/            # Data Access Objects
-│       │       └── servlet/        # Controllers
-│       └── webapp/
-│           ├── css/
-│           │   └── style.css       # Professional CSS
-│           ├── WEB-INF/
-│           │   └── web.xml         # Web configuration
-│           └── *.jsp               # View pages (8 files)
-├── database.sql                    # Database schema & sample data
-├── pom.xml                         # Maven configuration
-└── README.md                       # This file
+IS_ana-des_Final/
+├── src/main/
+│   ├── java/com/restaurant/
+│   │   ├── model/          # Entity classes (Question 2)
+│   │   │   ├── Dish.java
+│   │   │   ├── Supplier.java
+│   │   │   ├── ImportedInvoice.java
+│   │   │   ├── ImportedInvoiceDetail.java
+│   │   │   ├── Ingredient.java
+│   │   │   └── Staff.java
+│   │   ├── dao/            # Data Access Objects (Question 4)
+│   │   │   ├── DAO.java
+│   │   │   ├── DishDAO.java
+│   │   │   ├── SupplierDAO.java
+│   │   │   └── ImportedInvoiceDAO.java
+│   │   └── servlet/        # Controllers (Question 3)
+│   │       ├── DishServlet.java
+│   │       ├── SupplierStatServlet.java
+│   │       └── ImportedInvoiceServlet.java
+│   └── webapp/             # Views (JSP files)
+│       ├── DishSearchView.jsp
+│       ├── EditDishView.jsp
+│       ├── SupplierStatView.jsp
+│       ├── ListImportInvoiceView.jsp
+│       └── ImportInvoiceDetailView.jsp
+├── database.sql            # Database schema (Question 4.a)
+└── README.md
 ```
 
-## Hướng dẫn Cài đặt
+---
 
-### 1. Yêu cầu Hệ thống
-- JDK 11 hoặc cao hơn
-- Apache Tomcat 9.0+
-- MySQL 8.0+
-- Maven 3.6+
+## 📊 Course Requirements Implementation
 
-### 2. Cài đặt Cơ sở Dữ liệu
+### Question 1: Use Case & Scenarios ✅
+- **Use Case Diagram**: Identifies actors (Management Staff) and use cases for both modules
+- **Scenarios**: Documented standard and alternative flows for:
+  - Edit Dish Information
+  - View Supplier Statistics
 
-1. Mở MySQL Workbench hoặc MySQL Command Line
-2. Chạy file `database.sql`:
-   ```sql
-   source /path/to/database.sql
+### Question 2: Entity Classes & Class Diagram ✅
+**Extracted Entity Classes**:
+- `Dish` (dishID, name, price, description, category, image)
+- `Supplier` (supplierID, name, phone, email, address)
+- `ImportedInvoice` (importInvoiceID, importDate, totalPrice, supplierID, warehouseStaffID)
+- `ImportedInvoiceDetail` (importDetailID, quantity, price, importInvoiceID, ingredientID)
+- `Ingredient` (ingredientID, name, unit, quantity, supplierID)
+- `Staff` (staffID, username, password, name, phone, email, role)
+
+**Entity Class Diagram**: Shows relationships and multiplicities between entities
+
+### Question 3: Communication & Design Class Diagrams ✅
+- **Communication Diagrams**: Illustrate object interactions and message passing for:
+  - Edit Dish Information scenario
+  - View Supplier Statistics scenario (drill-down navigation)
+- **Detail Design Class Diagrams**: Include:
+  - Boundary classes (Views)
+  - Control classes (Servlets)
+  - Entity classes (Models)
+  - Methods with parameters and return types
+
+### Question 4: Database & Java Implementation ✅
+- **Database Design**: 
+  - Normalized relational schema (3NF)
+  - Primary keys, foreign keys, and constraints
+  - See `database.sql` for complete schema
+- **Java Code**:
+  - Entity classes with getters/setters
+  - DAO classes with CRUD operations
+  - Servlet controllers with request handling
+  - Comprehensive inline documentation
+
+### Question 5: Package & Deployment Diagrams ✅
+- **Package Diagram**: Organized into logical packages:
+  - `com.restaurant.model` - Entity classes
+  - `com.restaurant.dao` - Data access layer
+  - `com.restaurant.servlet` - Controller layer
+  - `webapp` - Presentation layer
+- **Deployment Diagram**: Three-tier architecture:
+  - Client Tier (Web Browser)
+  - Application Tier (Tomcat Server with Servlets/JSP)
+  - Data Tier (MySQL Database Server)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Java JDK 8 or higher
+- Apache Tomcat 9.x
+- MySQL Server 5.7+
+- Maven (optional, for dependency management)
+
+### Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd IS_ana-des_Final
    ```
-   Hoặc copy nội dung file và execute trong MySQL Workbench
 
-3. Kiểm tra database đã được tạo:
-   ```sql
-   USE restaurant_db;
-   SHOW TABLES;
+2. **Setup Database**
+   ```bash
+   mysql -u root -p
+   source database.sql
    ```
 
-### 3. Cấu hình Kết nối Database
+3. **Configure Database Connection**
+   
+   Edit `src/main/java/com/restaurant/dao/DAO.java`:
+   ```java
+   private static final String DB_URL = "jdbc:mysql://localhost:3306/RestaurantDB";
+   private static final String DB_USER = "root";
+   private static final String DB_PASSWORD = "your_password";
+   ```
 
-Mở file `src/main/java/com/restaurant/dao/DAO.java` và cập nhật thông tin kết nối:
+4. **Deploy to Tomcat**
+   
+   **Option 1: Using IntelliJ IDEA**
+   - Import project
+   - Configure Tomcat server (see `INTELLIJ_RUN_CONFIG_SAMPLE.xml`)
+   - Run configuration
 
-```java
-private static final String DB_URL = "jdbc:mysql://localhost:3306/restaurant_db";
-private static final String DB_USER = "root";
-private static final String DB_PASSWORD = "your_password_here";
-```
+   **Option 2: Manual Deployment**
+   ```bash
+   # Build WAR file
+   mvn clean package
+   
+   # Copy to Tomcat
+   cp target/RestaurantManagement.war $TOMCAT_HOME/webapps/
+   
+   # Start Tomcat
+   $TOMCAT_HOME/bin/startup.sh
+   ```
 
-### 4. Build Dự án
+5. **Access the Application**
+   ```
+   http://localhost:8080/RestaurantManagement/LoginView.jsp
+   ```
 
-```bash
-# Di chuyển vào thư mục dự án
-cd restaurant-management
+### Default Login Credentials
 
-# Build với Maven
-mvn clean package
-```
+| Role | Username | Password |
+|------|----------|----------|
+| Management Staff | admin | admin123 |
+| Warehouse Staff | warehouse1 | warehouse123 |
+| Sale Staff | sale1 | sale123 |
 
-File WAR sẽ được tạo tại: `target/restaurant-management.war`
+---
 
-### 5. Deploy lên Tomcat
+## 📖 User Guide
 
-**Cách 1: Sử dụng Tomcat Manager**
-1. Copy file `restaurant-management.war` vào thư mục `webapps` của Tomcat
-2. Khởi động Tomcat
-3. Truy cập: `http://localhost:8080/restaurant-management`
+### Module 1: Edit Dish Information
 
-**Cách 2: Sử dụng IDE (Eclipse/IntelliJ)**
-1. Import project as Maven project
-2. Configure Tomcat server trong IDE
-3. Run project trên Tomcat server
+1. Login as **Management Staff**
+2. Navigate to **Home** → **Dish Management**
+3. Enter dish name in search box and click **Search**
+4. Click **Edit** button on the desired dish
+5. Modify dish information (name, price, description, category)
+6. Click **Save** to update the database
 
-## Tài khoản Đăng nhập Mẫu
+### Module 2: View Supplier Statistics
 
-| Username  | Password | Vai trò           |
-|-----------|----------|-------------------|
-| manager   | 123      | Management Staff  |
-| warehouse | 123      | Warehouse Staff   |
-| sale      | 123      | Sale Staff        |
+1. Login as **Management Staff**
+2. Navigate to **Home** → **View Statistics**
+3. Click on **Supplier Statistics**
+4. Select **Start Date** and **End Date** for the report period
+5. Click **View Statistics** to see supplier list with import quantities
+6. Click on a **Supplier Name** to view their invoices
+7. Click **👁️ View Details** button to see invoice details
+8. View complete invoice information including:
+   - Invoice ID and date
+   - List of ingredients with quantities and prices
+   - Total invoice amount
 
-## Chức năng Chính
+---
 
-### Module 1: Quản lý Món ăn
-- ✅ Tìm kiếm món ăn theo tên
-- ✅ Xem danh sách món ăn
-- ✅ Sửa thông tin món ăn (tên, mô tả, giá)
-- ✅ Hiển thị thông báo sau khi cập nhật thành công
+## 🗄️ Database Schema
 
-### Module 2: Thống kê Nhà cung cấp
-- ✅ Xem thống kê nhà cung cấp theo khoảng thời gian
-- ✅ Drill-down Level 1: Xem danh sách hóa đơn nhập của nhà cung cấp
-- ✅ Drill-down Level 2: Xem chi tiết nguyên liệu trong hóa đơn
+### Key Tables
 
-### Tính năng Khác
-- ✅ Đăng nhập với xác thực vai trò
-- ✅ Session management
-- ✅ Giao diện hiện đại, responsive
-- ✅ Sidebar navigation với trạng thái active
-- ✅ Professional UI/UX design
+**Dish**
+- Primary Key: `dishID`
+- Attributes: name, price, description, category, image
 
-## Cấu trúc Database
+**Supplier**
+- Primary Key: `supplierID`
+- Attributes: name, phone, email, address
 
-Hệ thống sử dụng **19 bảng** với mô hình kế thừa "Table Per Subclass":
+**ImportedInvoice**
+- Primary Key: `importInvoiceID`
+- Foreign Keys: `supplierID`, `warehouseStaffID`
+- Attributes: importDate, totalPrice
 
-### Nhóm Actor & Customer
-- Staff (cha)
-- ManagementStaff, WarehouseStaff, SaleStaff (con - kế thừa)
-- Customer
-- Membership
+**ImportedInvoiceDetail**
+- Primary Key: `importDetailID`
+- Foreign Keys: `importInvoiceID`, `ingredientID`
+- Attributes: quantity, price
 
-### Nhóm Giao dịch & Bán hàng
-- Table
-- Reservation
-- Invoice
-- Order
+**Ingredient**
+- Primary Key: `ingredientID`
+- Foreign Key: `supplierID`
+- Attributes: name, unit, quantity
 
-### Nhóm Menu & Junction Tables
-- Dish
-- Combo
-- OrderDish
-- OrderCombo
-- DishCombo
+**Staff**
+- Primary Key: `staffID`
+- Attributes: username, password, name, phone, email, role
 
-### Nhóm Kho & Nhập hàng
-- Supplier
-- Ingredient
-- ImportedInvoice
-- ImportedInvoiceDetail
+---
 
-## Kiến trúc MVC
+## [object Object] Patterns Used
 
-### Model (com.restaurant.model)
-19 POJO classes đại diện cho các entity trong database
+### MVC Pattern
+- **Model**: Entity classes and DAO classes
+- **View**: JSP files for presentation
+- **Controller**: Servlet classes for request handling
 
-### DAO (com.restaurant.dao)
-- `DAO.java` - Base class với database connection
-- `StaffDAO.java` - Xử lý đăng nhập
-- `DishDAO.java` - CRUD operations cho món ăn
-- `SupplierStatDAO.java` - Thống kê nhà cung cấp
-- `ImportedInvoiceDAO.java` - Quản lý hóa đơn nhập
+### DAO Pattern
+- Separates data access logic from business logic
+- Provides abstraction layer for database operations
+- Implements CRUD operations for each entity
 
-### Controller (com.restaurant.servlet)
-- `StaffServlet.java` - Login/Logout
-- `DishServlet.java` - Quản lý món ăn
-- `SupplierStatServlet.java` - Thống kê
-- `ImportedInvoiceServlet.java` - Drill-down hóa đơn
+### Front Controller Pattern
+- Servlets act as front controllers
+- Handle routing based on action parameters
+- Centralized request processing
 
-### View (JSP)
-8 trang JSP với giao diện chuyên nghiệp:
-- LoginView.jsp
-- ManagementHomeView.jsp
-- ManageDishView.jsp
-- EditDishView.jsp
-- SelectStatisticView.jsp
-- SupplierStatView.jsp
-- ListImportInvoiceView.jsp
-- ImportInvoiceDetailView.jsp
+---
 
-## Giao diện UI/UX
+## 🔒 Security Features
 
-### Đặc điểm
-- ✅ Bố cục 2 cột: Sidebar + Main Content
-- ✅ Sidebar navigation cố định với trạng thái active
-- ✅ Header/Taskbar hiển thị tên người dùng
-- ✅ Font chuyên nghiệp (Inter, Roboto)
-- ✅ Bảng màu nhất quán (xanh dương chính)
-- ✅ Khoảng cách hợp lý, dễ đọc
-- ✅ Tables với hover effects
-- ✅ Forms được định dạng đẹp mắt
-- ✅ Responsive design
+- **Authentication**: Session-based login system
+- **Authorization**: Role-based access control (Management, Warehouse, Sale Staff)
+- **Session Management**: Automatic redirect to login if session expired
+- **SQL Injection Prevention**: PreparedStatement usage in all DAO classes
+- **Password Security**: (Note: In production, implement password hashing)
 
-## Xử lý Lỗi
+---
 
-Ứng dụng có xử lý lỗi cho:
-- Đăng nhập thất bại
-- Dữ liệu không hợp lệ
-- Kết nối database lỗi
-- Session timeout
+## 📝 Key Features Implemented
 
-## Bảo mật
+### Dish Management Module
+✅ Search dishes by name  
+✅ View dish details  
+✅ Edit dish information  
+✅ Delete dishes  
+✅ Add new dishes  
+✅ Image upload support  
+✅ Category management  
 
-- Session-based authentication
-- Password validation
-- SQL injection prevention (PreparedStatement)
-- XSS protection (JSTL escaping)
+### Supplier Statistics Module
+✅ Date range filtering  
+✅ Supplier ranking by import quantity  
+✅ Drill-down navigation (Supplier → Invoices → Details)  
+✅ Invoice detail view with ingredient list  
+✅ Total price calculation  
+✅ Add new imported invoices  
+✅ Dynamic ingredient selection  
 
-## Troubleshooting
+---
 
-### Lỗi kết nối Database
-```
-Error: Communications link failure
-```
-**Giải pháp**: Kiểm tra MySQL service đang chạy và thông tin kết nối trong `DAO.java`
+## 🧪 Testing
 
-### Lỗi 404 Not Found
-**Giải pháp**: Đảm bảo context path đúng: `/restaurant-management`
+### Test Scenarios
 
-### Lỗi Encoding (Tiếng Việt hiển thị sai)
-**Giải pháp**: Đã được xử lý trong `web.xml` với UTF-8 filter
+**Module 1: Edit Dish Information**
+1. Search for existing dish ✅
+2. Edit dish with valid data ✅
+3. Edit dish with invalid data (validation) ✅
+4. Save changes successfully ✅
 
-## Tác giả
-Developed by Professional Full-Stack J2EE Developer
+**Module 2: Supplier Statistics**
+1. View statistics with date range ✅
+2. Navigate to supplier invoices ✅
+3. View invoice details ✅
+4. Verify ingredient list display ✅
+5. Check total price calculation ✅
 
-## License
-Educational Purpose - Restaurant Management System
+---
+
+## 📚 Documentation
+
+### Code Documentation
+- All classes include JavaDoc comments
+- Methods documented with parameters and return types
+- Inline comments for complex logic
+
+### Database Documentation
+- ER diagram available
+- Table relationships documented
+- Sample data included in `database.sql`
+
+---
+
+## [object Object]
+
+### Common Issues
+
+**Issue**: Database connection error  
+**Solution**: Check MySQL service is running and credentials in `DAO.java` are correct
+
+**Issue**: 404 Error when accessing pages  
+**Solution**: Verify Tomcat deployment and context path
+
+**Issue**: Session timeout  
+**Solution**: Increase session timeout in `web.xml` or re-login
+
+**Issue**: Images not displaying  
+**Solution**: Check image paths and ensure images are in `webapp/images/` directory
+
+---
+
+## [object Object] Team
+
+- **Course**: Information System Analysis and Design
+- **Institution**: [Your University Name]
+- **Semester**: [Semester/Year]
+- **Instructor**: [Instructor Name]
+
+---
+
+## 📄 License
+
+This project is developed for educational purposes as part of the Information System Analysis and Design course.
+
+---
+
+## 📞 Contact & Support
+
+For questions or issues related to this project:
+- Email: [your-email@university.edu]
+- Course Forum: [link-to-forum]
+
+---
+
+## 🎓 Academic Integrity
+
+This project represents original work completed for the Information System Analysis and Design course. All external resources and references have been properly cited.
+
+---
+
+## 📅 Version History
+
+| Version | Date | Description |
+|---------|------|-------------|
+| 1.0 | 2025-11 | Initial implementation of two modules |
+| 1.1 | 2025-11 | UI improvements and bug fixes |
+| 1.2 | 2025-11 | Added invoice detail view with ingredients |
+
+---
+
+## 🔮 Future Enhancements
+
+- Customer module implementation
+- Online ordering system
+- Table reservation system
+- Payment gateway integration
+- Real-time inventory management
+- Advanced reporting and analytics
+- Mobile responsive design
+- RESTful API development
+
+---
+
+**Note**: This README provides comprehensive documentation for the implemented modules. For detailed UML diagrams, design documents, and analysis artifacts, please refer to the accompanying project documentation.

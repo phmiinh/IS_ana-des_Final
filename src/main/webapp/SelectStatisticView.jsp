@@ -42,22 +42,34 @@
             
             <!-- Content -->
             <div class="content">
-                <div class="card">
-                    <div class="page-title-centered">
-                        <h2>Select Statistic</h2>
-                    </div>
+                <div class="page-title-centered">
+                    <h2>Select Statistic Report</h2>
+                </div>
+                
+                <div class="statistic-grid">
+                    <a href="SupplierStatServlet?action=view" class="statistic-card">
+                        <div class="statistic-icon">📊</div>
+                        <h3>Supplier Statistics</h3>
+                        <p>View supplier statistics by imported quantity and time period</p>
+                    </a>
                     
-                    <div class="statistic-options">
-                        <a href="SupplierStatView.jsp" class="statistic-option-btn">
-                            Customer statistic
-                        </a>
-                        <a href="SupplierStatView.jsp" class="statistic-option-btn">
-                            Supplier statistic
-                        </a>
-                        <a href="#" class="statistic-option-btn disabled">
-                            Dish statistic
-                        </a>
-                    </div>
+                    <a href="#" class="statistic-card disabled">
+                        <div class="statistic-icon">👥</div>
+                        <h3>Customer Statistics</h3>
+                        <p>View customer statistics and membership information</p>
+                    </a>
+                    
+                    <a href="#" class="statistic-card disabled">
+                        <div class="statistic-icon">🍽️</div>
+                        <h3>Dish Statistics</h3>
+                        <p>View dish popularity and sales statistics</p>
+                    </a>
+                    
+                    <a href="#" class="statistic-card disabled">
+                        <div class="statistic-icon">🥗</div>
+                        <h3>Ingredient Statistics</h3>
+                        <p>View ingredient usage and inventory statistics</p>
+                    </a>
                 </div>
             </div>
         </div>
