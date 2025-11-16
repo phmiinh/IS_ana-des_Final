@@ -20,6 +20,13 @@ Restaurant Management System:
 
 - Directory structure
 src/main/
+  java/com/restaurant/
+    model             # Entity classes
+    dao               # DAO
+    servlet           # Controller
+  webapp/             # JSP views
+    css/
+    *.jsp
 ├── java/com/restaurant/
 │   ├── model/          # Entity classes
 │   ├── dao/            # Data Access Object
