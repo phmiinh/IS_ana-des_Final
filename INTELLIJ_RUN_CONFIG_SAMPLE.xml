@@ -1,0 +1,120 @@
+<!-- 
+  HƯỚNG DẪN: Copy nội dung này vào IntelliJ Run Configuration
+  
+  Cách sử dụng:
+  1. Run → Edit Configurations
+  2. Click + → Tomcat Server → Local
+  3. Paste các giá trị tương ứng từ file này
+-->
+
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Tomcat 9 - Restaurant" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.xx" ALTERNATIVE_JRE_ENABLED="false">
+    
+    <!-- Deployment Tab -->
+    <deployment>
+      <artifact name="restaurant-management:war exploded">
+        <settings>
+          <option name="CONTEXT_PATH" value="/restaurant-management" />
+        </settings>
+      </artifact>
+    </deployment>
+    
+    <!-- Server Tab -->
+    <server-settings>
+      <option name="BASE_DIRECTORY_NAME" value="restaurant_tomcat" />
+      <option name="HTTP_PORT" value="8080" />
+      <option name="JNDI_PORT" value="1099" />
+      
+      <!-- Hot Reload Settings -->
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_RESOURCES_ON_FRAME_DEACTIVATION" value="true" />
+    </server-settings>
+    
+    <!-- Startup/Connection Tab -->
+    <predefined_log_file enabled="true" id="Tomcat" />
+    <predefined_log_file enabled="true" id="Tomcat Catalina" />
+    <predefined_log_file id="Tomcat Manager" />
+    <predefined_log_file id="Tomcat Host Manager" />
+    <predefined_log_file id="Tomcat Localhost Access" />
+    
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="5005" />
+    </RunnerSettings>
+    
+    <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    
+    <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    
+    <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="restaurant-management:war exploded" />
+      </option>
+    </method>
+  </configuration>
+</component>
+
+<!-- 
+  CÁC THÔNG SỐ QUAN TRỌNG:
+  
+  1. APPLICATION_SERVER_NAME: "Tomcat 9.0.xx" 
+     → Thay xx bằng phiên bản Tomcat của bạn
+  
+  2. CONTEXT_PATH: "/restaurant-management"
+     → URL sẽ là: http://localhost:8080/restaurant-management
+  
+  3. HTTP_PORT: 8080
+     → Đổi thành 8081 nếu port 8080 bị chiếm
+  
+  4. artifact name: "restaurant-management:war exploded"
+     → IntelliJ tự động tạo khi build
+  
+  5. UPDATE_ON_FRAME_DEACTIVATION: true
+     → Cho phép hot reload khi sửa code
+-->
+

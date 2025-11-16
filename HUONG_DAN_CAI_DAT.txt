@@ -1,0 +1,80 @@
+========================================
+HỆ THỐNG QUẢN LÝ NHÀ HÀNG
+Restaurant Management System
+========================================
+
+I. YÊU CẦU HỆ THỐNG
+-------------------
+- JDK 11 hoặc cao hơn
+- Apache Tomcat 9.0+
+- MySQL 8.0+
+- Maven 3.6+
+
+II. CÀI ĐẶT CƠ SỞ DỮ LIỆU
+--------------------------
+1. Mở MySQL Workbench hoặc MySQL Command Line
+2. Chạy file database.sql
+3. Database "restaurant_db" sẽ được tạo với 19 bảng và dữ liệu mẫu
+
+III. CẤU HÌNH KẾT NỐI DATABASE
+------------------------------
+Mở file: src/main/java/com/restaurant/dao/DAO.java
+Cập nhật thông tin:
+- DB_URL: jdbc:mysql://localhost:3306/restaurant_db
+- DB_USER: root
+- DB_PASSWORD: (mật khẩu MySQL của bạn)
+
+IV. BUILD DỰ ÁN
+---------------
+Mở Terminal/Command Prompt:
+cd restaurant-management
+mvn clean package
+
+File WAR sẽ được tạo tại: target/restaurant-management.war
+
+V. DEPLOY LÊN TOMCAT
+--------------------
+Cách 1: Copy file WAR vào thư mục webapps của Tomcat
+Cách 2: Sử dụng IDE (Eclipse/IntelliJ) để run trên Tomcat
+
+VI. TRUY CẬP ỨNG DỤNG
+---------------------
+URL: http://localhost:8080/restaurant-management
+
+TÀI KHOẢN ĐĂNG NHẬP MẪU:
+- manager / 123 (Quản lý)
+- warehouse / 123 (Kho)
+- sale / 123 (Bán hàng)
+
+VII. CẤU TRÚC DỰ ÁN
+--------------------
+src/main/java/com/restaurant/
+├── model/          (19 POJO classes)
+├── dao/            (4 DAO classes)
+└── servlet/        (4 Servlet classes)
+
+src/main/webapp/
+├── css/style.css   (Professional CSS)
+├── *.jsp           (8 View pages)
+└── WEB-INF/web.xml
+
+VIII. CHỨC NĂNG CHÍNH
+---------------------
+1. Module Quản lý Món ăn:
+   - Tìm kiếm món ăn
+   - Xem danh sách
+   - Sửa thông tin món ăn
+
+2. Module Thống kê Nhà cung cấp:
+   - Xem thống kê theo thời gian
+   - Drill-down: Xem hóa đơn nhập
+   - Drill-down: Xem chi tiết nguyên liệu
+
+IX. LIÊN HỆ HỖ TRỢ
+-------------------
+Nếu gặp vấn đề, vui lòng kiểm tra:
+1. MySQL service đang chạy
+2. Thông tin kết nối database đúng
+3. Tomcat đã được cấu hình đúng
+4. Port 8080 không bị chiếm dụng
+
